@@ -73,27 +73,7 @@ ORDER BY
  SELECT month(new_date)as month ,COUNT(DISTINCT user_id) as no_of_users from transactions
  GROUP BY month(new_date);
  
-SELECT
-  MONTH(new_date) AS month,
-  COUNT(DISTINCT user_id) AS total_users,
-  COUNT(DISTINCT CASE WHEN EXTRACT(YEAR_MONTH FROM new_date) = EXTRACT(YEAR_MONTH FROM MIN(new_date)) THEN user_id END) AS retained_users
-FROM transactions
-GROUP BY MONTH(new_date)
-ORDER BY MONTH(new_date);
- 
-SELECT
-  MONTH(new_date) AS month,
-  COUNT(DISTINCT user_id) AS total_users,
-  COUNT(DISTINCT CASE WHEN cohort_month = MONTH(new_date) THEN user_id END) AS retained_users
-FROM (
-  SELECT
-    user_id,
-    MIN(new_date) AS cohort_month
-  FROM transactions
-  GROUP BY user_id
-) AS cohorts
-GROUP BY MONTH(new_date)
-ORDER BY MONTH(new_date);
+
  
 
  
